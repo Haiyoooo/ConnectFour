@@ -9,6 +9,7 @@ void CheckWin();
 //VARIABLES
 const int rows = 6, col = 7;
 char grid[rows][col] = { };
+bool gamestate = 0; //0 = not over
 
 
 
@@ -26,9 +27,10 @@ int main()
 			}
 		}
 
-		while (rows > 0)
+		while (gamestate == 0)
 		{
 			PrintGrid();
+			CheckWin();
 
 			// ask player X to choose a column
 			cout << "Player X's turn! Choose a column (1-7): ";
@@ -54,9 +56,9 @@ int main()
 				cout << "boo \n";
 			}
 
-			CheckWin();
 
 			PrintGrid();
+			CheckWin();
 
 			// ask player O to choose a column
 			cout << "Player Y's turn! Choose a column (1-7): ";
@@ -82,7 +84,6 @@ int main()
 				cout << "boo \n";
 			}
 
-			CheckWin();
 
 		}
 
@@ -109,25 +110,26 @@ void PrintGrid()
 
 void CheckWin()
 {
-	int connect = 1; // when connect = 4, players win
+	int connect = 1; // when connect >= 4, players win
 
-	int r = rows;
-	int c = col;
-
-	for (int i = r ; i < c ; i--)
+	for (int i = 0 ; i < col ; i++)
 	{
-		if (grid[i][c] == grid[i - 1][c] && grid[i][c] != '.')
+		if (grid[rows-1][i] == grid[rows-1][i+1] && grid[rows - 1][i] != '.')
 		{
-			if (connect != 4)
+			if (connect >= 2)
+			{
+				if (grid[rows - 1][i] == 'X')
+					cout << "\n ____ XXX WOOOOOON _________" << endl;
+				if (grid[rows - 1][i] == 'O')
+					cout << "\n ____ OOO WOOOOOON _________" << endl;
+
+				gamestate == 1;
+				
+			}
+			else
 			{
 				connect++;
-			}
-			else if (connect == 4)
-			{
-				if (grid[i][c] = 'X')
-					cout << "Player X has won!";
-				if (grid[i][c] = 'Y')
-					cout << "Player Y has won!";
+				cout << connect;
 			}
 		}
 		
