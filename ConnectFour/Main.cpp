@@ -4,7 +4,7 @@ using namespace std; //use standard namespace
 
 void PrintGrid();
 
-//Variables
+//VARIABLES
 const int rows = 6, col = 7;
 char grid[rows][col] = { };
 
@@ -13,7 +13,6 @@ int main()
 	cout << "Welcome to Connect Four\n";
 
 		//Create the initial Grid
-		cout << "1234567" << endl;
 		for (int x = 0; x < rows; x++)
 		{
 			for (int y = 0; y < col; y++)
@@ -23,26 +22,35 @@ int main()
 			}
 		}
 
-		PrintGrid();
-
-		// ask player to choose a colmun
-		cout << "Choose a column (1-7):" << endl;
-		int i = 0;
-		cin >> i;
-
-		// check if input is valid
-		if (i >= 1 && i <= col) //VALID
+		while (rows > 0)
 		{
-			cout << "yay \n";
-			grid[rows-1][i-1] = 'X';
-		}
-		else //INVALID
-		{
-			cout << "boo \n";
-		}
+			PrintGrid();
 
-		PrintGrid();
+			// ask player X to choose a column
+			cout << "Player X's turn! Choose a column (1-7):";
+			int i = 0;
+			cin >> i;
 
+			// drop a X into the column the player chose...
+			if (i >= 1 && i <= col)
+			{
+				int r = rows - 1;
+
+				while (grid[r][i - 1] != '.' && r >=0)
+				{
+					--r;
+				}
+
+				grid[r][i - 1] = 'X';
+			}
+
+			// if the player didn't enter a valid column number...
+			else
+			{
+				cout << "boo \n";
+			}
+
+		}
 
 	system("pause");
 	return 0;
@@ -52,6 +60,7 @@ int main()
 //_________________PRINT A GRID________________
 void PrintGrid()
 {
+	cout << "1234567" << endl;
 	for (int x = 0; x < rows; x++)
 	{
 		for (int y = 0; y < col; y++)
