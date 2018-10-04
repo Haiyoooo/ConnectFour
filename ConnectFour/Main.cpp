@@ -27,11 +27,11 @@ int main()
 			PrintGrid();
 
 			// ask player X to choose a column
-			cout << "Player X's turn! Choose a column (1-7):";
+			cout << "Player X's turn! Choose a column (1-7): ";
 			int i = 0;
 			cin >> i;
 
-			// drop a X into the column the player chose...
+			// drop an X into the column chosen...
 			if (i >= 1 && i <= col)
 			{
 				int r = rows - 1;
@@ -42,6 +42,33 @@ int main()
 				}
 
 				grid[r][i - 1] = 'X';
+			}
+
+			// if the player didn't enter a valid column number...
+			else
+			{
+				cout << "boo \n";
+			}
+
+
+			PrintGrid();
+
+			// ask player O to choose a column
+			cout << "Player Y's turn! Choose a column (1-7): ";
+			int j = 0;
+			cin >> j;
+
+			// drop an O into the column chosen...
+			if (j >= 1 && j <= col)
+			{
+				int rr = rows - 1;
+
+				while (grid[rr][j - 1] != '.' && rr >= 0)
+				{
+					--rr;
+				}
+
+				grid[rr][j - 1] = 'O';
 			}
 
 			// if the player didn't enter a valid column number...
