@@ -2,11 +2,15 @@ using namespace std; //use standard namespace
 
 #include <iostream> //without this, cout is undefined
 
+//FUNCTIONS
 void PrintGrid();
+void CheckWin();
 
 //VARIABLES
 const int rows = 6, col = 7;
 char grid[rows][col] = { };
+
+
 
 int main()
 {
@@ -50,6 +54,7 @@ int main()
 				cout << "boo \n";
 			}
 
+			CheckWin();
 
 			PrintGrid();
 
@@ -77,6 +82,8 @@ int main()
 				cout << "boo \n";
 			}
 
+			CheckWin();
+
 		}
 
 	system("pause");
@@ -97,5 +104,34 @@ void PrintGrid()
 		}
 		cout << endl;
 	}
+}
+
+
+void CheckWin()
+{
+	int connect = 1; // when connect = 4, players win
+
+	int r = rows;
+	int c = col;
+
+	for (int i = r ; i < c ; i--)
+	{
+		if (grid[i][c] == grid[i - 1][c] && grid[i][c] != '.')
+		{
+			if (connect != 4)
+			{
+				connect++;
+			}
+			else if (connect == 4)
+			{
+				if (grid[i][c] = 'X')
+					cout << "Player X has won!";
+				if (grid[i][c] = 'Y')
+					cout << "Player Y has won!";
+			}
+		}
+		
+	}
+
 }
 
