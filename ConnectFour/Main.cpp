@@ -7,7 +7,8 @@ void PrintGrid();
 int CheckWin();
 
 //VARIABLES
-const int rows = 6, col = 7;
+const int rows = 2; //6
+const int col = 3; //7
 char grid[rows][col] = { };
 
 
@@ -65,7 +66,7 @@ int main()
 				}
 				
 				PrintGrid();
-				CheckWin();
+	
 					
 			}
 
@@ -100,30 +101,92 @@ void PrintGrid()
 }
 
 
-int CheckWin()
+int CheckWin() // 0 = game ongoing, 1 = game ended (win/draw)
 {
-	int j = 0;
-	int i = rows - 1;
+		int filled = 0;
+		// Check for four in a row starting with piece in the bottom left corner
+	    /*  
+			Direction of checks: to the right, then up a row
+			5 ------> 6
+			3 ------> 4
+			1 ------> 2
+		*/
+		for (int j = 0; j < col; j++)
+		{
+			for (int i = rows - 1; i >= 0; i--)
+			{
+				//verticle win
+				if (grid[i][j] == grid[i - 1][j] && grid[i][j] == grid[i - 2][j] && grid[i][j] == grid[i - 3][j] && grid[i][j] == 'X')
+				{
+					cout << "Player X wins!" << endl;
+					return 1;
+				}
 
-	for (i; i >= 0; i--)
-	{
-		if (grid[i][j] == grid[i - 1][j] && grid[i][j] == grid[i - 2][j] && grid[i][j] == grid[i - 3][j] && grid[i][j] != '.')
-		{
-			if (grid[i][j] == 'X')
-			{
-				cout << "Player X wins!" << endl;
+				else if (grid[i][j] == grid[i - 1][j] && grid[i][j] == grid[i - 2][j] && grid[i][j] == grid[i - 3][j] && grid[i][j] == 'O')
+				{
+					cout << "Player O wins!" << endl;
+					return 1;
+				}
+
+				//horizontal win
+				else if (grid[i][j] == grid[i][j + 1] && grid[i][j] == grid[i][j + 2] && grid[i][j] == grid[i][j + 3] && grid[i][j] == 'X')
+				{
+					cout << "Player X wins!" << endl;
+					return 1;
+				}
+
+				else if (grid[i][j] == grid[i][j + 1] && grid[i][j] == grid[i][j + 2] && grid[i][j] == grid[i][j + 3] && grid[i][j] == 'O')
+				{
+					cout << "Player O wins!" << endl;
+					return 1;
+				}
+
+				//diagonal win .-'
+				else if (grid[i][j] == grid[i - 1][j + 1] && grid[i][j] == grid[i - 2][j + 2] && grid[i][j] == grid[i - 3][j + 3] && grid[i][j] == 'X')
+				{
+					cout << "Player X wins!" << endl;
+					return 1;
+				}
+
+				else if (grid[i][j] == grid[i - 1][j + 1] && grid[i][j] == grid[i - 2][j + 2] && grid[i][j] == grid[i - 3][j + 3] && grid[i][j] == 'O')
+				{
+					cout << "Player O wins!" << endl;
+					return 1;
+				}
+
+				//diagonal win '-.
+				else if (grid[i][j] == grid[i - 1][j - 1] && grid[i][j] == grid[i - 2][j - 2] && grid[i][j] == grid[i - 3][j - 3] && grid[i][j] == 'X')
+				{
+					cout << "Player X wins!" << endl;
+					return 1;
+				}
+
+				else if (grid[i][j] == grid[i - 1][j - 1] && grid[i][j] == grid[i - 2][j - 2] && grid[i][j] == grid[i - 3][j - 3] && grid[i][j] == 'O')
+				{
+					cout << "Player O wins!" << endl;
+					return 1;
+				}
+
+				// check for draw
+				// minus "filled" variable
+				if (grid[i][j] != '.')
+				{
+					filled++;
+				}
+
+				if (filled == sizeof(grid))
+				{
+					cout << "Draw" << endl;
+					return 1;
+				}
+				
 			}
-			else if (grid[i][j] == 'O')
-			{
-				cout << "Player O wins!" << endl;
-			}
-			return 1;
 		}
-		else
-		{
-			return 0;
-		}
-	}
+	
+	 return 0; 
+	
+			
+	
 
 }
 
